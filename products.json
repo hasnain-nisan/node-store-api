@@ -127,5 +127,11 @@
       "price": 23,
       "featured": true,
       "company": "caressa"
+    },
+    {
+      "name": "Limozine",
+      "price": 2300,
+      "featured": true,
+      "company": "aurous"
     }
   ]
