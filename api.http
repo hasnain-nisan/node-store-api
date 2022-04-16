@@ -1,0 +1,18 @@
+@host = http://localhost:5000/api/v1/products
+
+
+###
+GET {{host}} HTTP/1.1
+content-type: application/json
+
+{
+
+}
+
+###
+GET {{host}}?featured=false&company=marcos&name=accent%20chair HTTP/1.1
+content-type: application/json
+
+{
+    
+}
