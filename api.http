@@ -10,7 +10,16 @@ content-type: application/json
 }
 
 ###
-GET {{host}}?featured=false&company=marcos&name=accent%20chair HTTP/1.1
+GET {{host}}?name=aa HTTP/1.1
+content-type: application/json
+
+{
+    
+}
+
+
+###
+GET {{host}} HTTP/1.1
 content-type: application/json
 
 {
