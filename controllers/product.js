@@ -55,12 +55,19 @@ const getAllProducts = async (req, res) => {
     result.skip(skip).limit(limit)
 
     const products = await result
+    const p = await Product.find({})
+    const total_page = Math.ceil(p.length/limit)
+    const next_page = page + 1 <= total_page ? page + 1 : null
+    const prev_page = page - 1 >= 1 ? page - 1 : null
 
     res.status(200).json({
         msg: 'Product route',
         products,
         nbHits: products.length,
-        page
+        page,
+        total_page,
+        next_page,
+        prev_page
     })
 }
 
