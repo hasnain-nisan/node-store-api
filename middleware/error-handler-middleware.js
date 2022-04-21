@@ -1,5 +1,5 @@
 const errorHandlerMiddleware = (err, req, res, next) => {
-    return res.status(500).json({msg: 'Something went wrong, please try again'})
+    return res.status(500).json({msg: `${err}`})
 }
 
 module.exports = errorHandlerMiddleware
