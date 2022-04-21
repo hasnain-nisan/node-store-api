@@ -2,7 +2,7 @@
 
 
 ###
-GET {{host}} HTTP/1.1
+GET {{host}}/static HTTP/1.1
 content-type: application/json
 
 {
@@ -19,7 +19,7 @@ content-type: application/json
 
 
 ###
-GET {{host}} HTTP/1.1
+GET {{host}}?page=3 HTTP/1.1
 content-type: application/json
 
 {
