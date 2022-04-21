@@ -4,10 +4,10 @@ const getAllProductsStatic = async (req, res) => {
     const products = await Product.find({
         price:{
             $gt: 30,
-            $lt: 40
+            $lt: 100
         }
     })
-        .sort('name')
+        .sort('price')
         .select('name price')
         .limit(10)
         .skip(1)
@@ -23,7 +23,7 @@ const getAllProductsStatic = async (req, res) => {
 
 const getAllProducts = async (req, res) => {
 
-    const {featured, company, name, sort, fields} = req.query
+    const {featured, company, name, sort, fields, numericFilters} = req.query
     const queryObj = {};
 
     if(featured){
@@ -47,6 +47,14 @@ const getAllProducts = async (req, res) => {
     }
 
     if(fields){
+        const fieldLists = fields.split(',').join(" ")
+        result.select(fieldLists)
+    } else {
+        result.select('name price company rating featured createdAt')
+    }
+
+    if(numericFilters){
+        console.log(numericFilters);
         const fieldLists = fields.split(',').join(" ")
         result.select(fieldLists)
     } else {
