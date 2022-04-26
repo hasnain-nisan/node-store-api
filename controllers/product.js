@@ -38,7 +38,28 @@ const getAllProducts = async (req, res) => {
         queryObj.name = {$regex: name, $options: 'i'}
     }
 
+    if(numericFilters){
+        const operatorMap = {
+            '>'  : '$gt',
+            '>=' : '$gte',
+            '='  : '$eq',
+            '<'  : '$lt',
+            '<=' : '$lte'
+        }
+
+        const regex = /\b(<|<=|=|>=|>)\b/g
+        let filters = numericFilters.replace(regex,(match) => `-${operatorMap[match]}-`)
+        const options = ['price', 'rating']
+        filters = filters.split(',').forEach((item) => {
+            const [field, operator, value] = item.split('-')
+            if(options.includes(field)){
+                queryObj[field] = {[operator]: Number(value)}
+            }
+        })
+    }
+
     const result = Product.find(queryObj)
+    
     if(sort){
         const sortLists = sort.split(',').join(" ")
         result.sort(sortLists)
@@ -47,14 +68,6 @@ const getAllProducts = async (req, res) => {
     }
 
     if(fields){
-        const fieldLists = fields.split(',').join(" ")
-        result.select(fieldLists)
-    } else {
-        result.select('name price company rating featured createdAt')
-    }
-
-    if(numericFilters){
-        console.log(numericFilters);
         const fieldLists = fields.split(',').join(" ")
         result.select(fieldLists)
     } else {

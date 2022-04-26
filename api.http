@@ -19,7 +19,7 @@ content-type: application/json
 
 
 ###
-GET {{host}}?numericFilters=price>30 HTTP/1.1
+GET {{host}}?numericFilters=price>40,rating=4.5 HTTP/1.1
 content-type: application/json
 
 {
